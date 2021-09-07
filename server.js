@@ -1,11 +1,13 @@
 require('dotenv').config();
 const db = require('./db');
 const express = require('express');
+const cors = require('cors');
 const morgan = require('morgan');
 
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 //this gets all the polling units
 app.get('/api/v1/pu', async (req, res) => {
@@ -20,7 +22,7 @@ app.get('/api/v1/pu', async (req, res) => {
   }
 });
 
-//this gets individual polling unit
+// //this gets individual polling unit
 app.get('/api/v1/pu/:id', async (req, res) => {
   try {
     const result = await db.query(
